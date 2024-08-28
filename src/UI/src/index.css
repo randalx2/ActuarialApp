@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+body {
+  min-width: 100%;
+  min-height: 100%;
+}
+
+:root {
+  height: 100%;
+  width: 100%;
+  min-width: 300px;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

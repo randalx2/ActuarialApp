@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>db754cf0-4d05-4a67-a69d-8f541b8d5e91</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\..\..</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Aspire\Actuarial.ServiceDefaults\Actuarial.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\..\..\Core\Core.Infrastructure\Core.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Pipeline\Pipeline.Application\Pipeline.Application.csproj" />
+    <ProjectReference Include="..\..\Schema\Schema.Application\Schema.Application.csproj" />
+  </ItemGroup>
+
+</Project>

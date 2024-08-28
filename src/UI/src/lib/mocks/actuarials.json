@@ -1,0 +1,125 @@
+[
+  {
+    "actuarialId": 101,
+    "label": "mortality_rate_analysis",
+    "description": "Analyze mortality rates based on age, gender, and smoking status.",
+    "projectId": 201,
+    "startDateTimeUtc": "2024-09-01T08:00:00Z",
+    "endDateTimeUtc": "2024-09-30T17:00:00Z",
+    "actuarialType": "Math",
+    "variants": [
+      {
+        "variantId": 1001,
+        "actuarialId": 101,
+        "label": "non_smoker_male_30_40",
+        "description": "Mortality rate for non-smoker males aged 30-40.",
+        "isControl": true,
+        "pickProbabilityPercent": 50
+      },
+      {
+        "variantId": 1002,
+        "actuarialId": 101,
+        "label": "smoker_female_40_50",
+        "description": "Mortality rate for smoker females aged 40-50.",
+        "isControl": false,
+        "pickProbabilityPercent": 50
+      }
+    ],
+    "payouts": [
+      {
+        "payoutVariantId": 5001,
+        "payoutShortName": "mortality_risk",
+        "moduleId": 301,
+        "clientIds": [40300, 50300]
+      },
+      {
+        "payoutVariantId": 5002,
+        "payoutShortName": "mortality_adjustment",
+        "moduleId": 302,
+        "clientIds": [40300]
+      }
+    ]
+  },
+  {
+    "actuarialId": 102,
+    "label": "policy_pricing_model",
+    "description": "Develop pricing models for term life insurance policies.",
+    "projectId": 202,
+    "startDateTimeUtc": "2024-10-01T08:00:00Z",
+    "endDateTimeUtc": "2024-10-31T17:00:00Z",
+    "actuarialType": "UI",
+    "variants": [
+      {
+        "variantId": 1003,
+        "actuarialId": 102,
+        "label": "standard_term_20_years",
+        "description": "Pricing for a standard 20-year term policy.",
+        "isControl": true,
+        "pickProbabilityPercent": 70
+      },
+      {
+        "variantId": 1004,
+        "actuarialId": 102,
+        "label": "enhanced_term_30_years",
+        "description": "Pricing for an enhanced 30-year term policy with additional benefits.",
+        "isControl": false,
+        "pickProbabilityPercent": 30
+      }
+    ],
+    "payouts": [
+      {
+        "payoutVariantId": 5003,
+        "payoutShortName": "term_policy_pricing",
+        "moduleId": 401,
+        "clientIds": [40300, 50300]
+      },
+      {
+        "payoutVariantId": 5004,
+        "payoutShortName": "premium_adjustment",
+        "moduleId": 402,
+        "clientIds": [40300]
+      }
+    ]
+  },
+  {
+    "actuarialId": 103,
+    "label": "risk_assessment_model",
+    "description": "Risk assessment model for high-net-worth individuals.",
+    "projectId": 203,
+    "startDateTimeUtc": "2024-11-01T08:00:00Z",
+    "endDateTimeUtc": "2024-11-30T17:00:00Z",
+    "actuarialType": "Math",
+    "variants": [
+      {
+        "variantId": 1005,
+        "actuarialId": 103,
+        "label": "low_risk_profile",
+        "description": "Assessment for individuals with a low-risk profile.",
+        "isControl": true,
+        "pickProbabilityPercent": 60
+      },
+      {
+        "variantId": 1006,
+        "actuarialId": 103,
+        "label": "high_risk_profile",
+        "description": "Assessment for individuals with a high-risk profile.",
+        "isControl": false,
+        "pickProbabilityPercent": 40
+      }
+    ],
+    "payouts": [
+      {
+        "payoutVariantId": 5005,
+        "payoutShortName": "risk_evaluation",
+        "moduleId": 501,
+        "clientIds": [40300, 50300]
+      },
+      {
+        "payoutVariantId": 5006,
+        "payoutShortName": "risk_mitigation",
+        "moduleId": 502,
+        "clientIds": [40300]
+      }
+    ]
+  }
+]
