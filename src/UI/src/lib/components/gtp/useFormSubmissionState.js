@@ -21,7 +21,7 @@ const useFormSubmissionState = (form, allowDirtySubmit, allowPristineSubmit) => 
 
   return useMemo(
     () => ({ canSave, canDiscard, submitting, updateFormState }),
-    [allowPristineSubmit, syncErrors, asyncErrors, submitFailed, submitting]
+    [canSave, canDiscard, submitting]
   )
 }
 

@@ -286,7 +286,7 @@ const Review = ({ prevStep, formData, isUpdate, actuarial, actProps }) => {
     <Grid item xs={12} sm={12}>
       <FormControlLabel
         label={
-          <Typography variant="h6" data-testid="review-checkbox">
+          <Typography variant="h12" data-testid="review-checkbox">
             I confirm that I have reviewed the information supplied and understand that my Actuarial Data will be available within <strong>5 minutes</strong> of submission.
           </Typography>
         }
@@ -305,11 +305,11 @@ const Review = ({ prevStep, formData, isUpdate, actuarial, actProps }) => {
     <form className={classes.form} onSubmit={handleSubmit}>
       <Paper className={classes.paper}>
         <Grid container spacing={2} direction="row" justifyContent="flex-start" alignItems="stretch">
-          {displayData('Review', 'Please confirm that the information displayed below is correct.', 12, 'h3')}
-          {displayData('Act name', formData.actName, 6)}
-          {displayData('Actuarial Type', formData.actuarialType, 6)}
-          {displayData('Actuarial label', formData.actuarialLabel)}
-          {displayData('Actuarial description', formData.actuarialDescription)}
+          {displayData('Review', 'Please confirm that the information displayed below is correct.', 12, 'h5')}
+          {displayData('Act name', formData.actName, 6, 'h6')}
+          {displayData('Actuarial Type', formData.actuarialType, 6, 'h6')}
+          {displayData('Actuarial label', formData.actuarialLabel, 6, 'h6')}
+          {displayData('Actuarial description', formData.actuarialDescription, 6, 'h6')}
         </Grid>
       </Paper>
 
