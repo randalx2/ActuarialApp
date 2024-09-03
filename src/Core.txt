@@ -1,0 +1,15 @@
+ Volume in drive C is Windows
+ Volume Serial Number is C2CE-FBAA
+
+ Directory of C:\Users\pmist\Source\Repos\ActuarialApp\src
+
+2024/09/03  03:17    <DIR>          .
+2024/09/03  03:17    <DIR>          ..
+2024/08/28  15:05    <DIR>          Aspire
+2024/08/28  15:05    <DIR>          Core
+2024/09/03  03:17                 0 Core.txt
+2024/08/28  15:05    <DIR>          Gateways
+2024/08/28  15:05    <DIR>          Microservices
+2024/08/28  15:34    <DIR>          UI
+               1 File(s)              0 bytes
+               7 Dir(s)  16ÿ108ÿ744ÿ704 bytes free
