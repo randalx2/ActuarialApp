@@ -42,11 +42,7 @@ public class EventService : IEventService
         var response = await _azureStorageQueue.RetrieveNextMessageAsync(cancellationToken);
 
         if (response)
-        {
-            // TODO: Add Business Logic to handle to message.
-            
-            
-            
+        {            
             _logger.LogInformation("{datetime} {method}: Processing of {json} succeeded. Returning Ok().", DateTime.Now, nameof(HandleNotificationAsync), jsonContent);
             return new OkObjectResult(response);
         }

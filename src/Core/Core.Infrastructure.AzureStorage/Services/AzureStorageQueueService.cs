@@ -35,6 +35,7 @@ public class AzureStorageQueueService : IAzureStorageQueue
     public async Task<bool> ProcessQueueMessage(string message, CancellationToken cancellationToken = default)
     {
         // Process the data receieved from Azure Storage
+        // This is where we hit the Python Microservice and wait for a successful message
 
         return await Task.FromResult(true);
     }
