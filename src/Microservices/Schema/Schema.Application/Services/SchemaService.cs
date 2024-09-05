@@ -36,6 +36,7 @@ public class SchemaService : ISchemaService
     {
         var schemaDtoList = new List<UiSchemaDto>();
 
+        // Mock Data for schemas
         var schemaDto = new UiSchemaDto
         {
             UiSchema = new UiSchema
