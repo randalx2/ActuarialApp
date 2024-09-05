@@ -18,7 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Aspire\Actuarial.ServiceDefaults\Actuarial.ServiceDefaults.csproj" />
     <ProjectReference Include="..\..\..\Core\Core.Infrastructure\Core.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Pipeline\Pipeline.Application\Pipeline.Application.csproj" />
     <ProjectReference Include="..\..\Schema\Schema.Application\Schema.Application.csproj" />
