@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Button, CircularProgress, Typography, Grid, FormControlLabel, Checkbox } from '@material-ui/core'
+import { Button, Typography, Grid, FormControlLabel, Checkbox } from '@material-ui/core'
 import { Paper } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import FormHeader from '../gtp/FormHeader'
@@ -178,9 +178,6 @@ const Review = ({ prevStep, formData, isUpdate, actuarial, actProps }) => {
   const [errorMessage, setErrorMessage] = useState('')
   const [acknowledged, setAcknowledged] = useState(false)
 
-  const [loading, setLoading] = useState(false); // State to manage spinner visibility
-  const [statusMessage, setStatusMessage] = useState(''); // State to manage status messages
-
   // Destructuring mutate function from useCreateChangelog for creating a new changelog
   const { mutate: createChangelog } = useCreateChangelog()
 
@@ -201,119 +198,128 @@ const Review = ({ prevStep, formData, isUpdate, actuarial, actProps }) => {
   const handleReturn = () => {
     history.push(`/acts/${actProps.actIdRoute}/projects/${actProps.projectId}/dev/actuarials`)
   }
-
   const handleSubmit = async e => {
-    e.preventDefault();
-    setErrorMessage('');
-    setLoading(true);
-    setStatusMessage('Pipeline Started');
+    e.preventDefault()
+    setErrorMessage('')
 
-    // Simulate the pipeline process
-    setTimeout(async () => {
-      setStatusMessage('Processing'); // Set the status to Processing
+    try {
+      const url = '/actuarials'
 
-      try {
-        const url = '/actuarials';
-
-        if (isUpdate && actuarial) {
-          const actuarialUpdateRequestModel = {
-            actName: actProps.actName,
-            actuarialLabel: formData.actuarialLabel,
-            actuarialDescription: formData.actuarialDescription,
-            startDateTimeUtc: formData.startDateTimeUtc,
-            endDateTimeUtc: formData.endDateTimeUtc,
-            variantUpdateRequestModels: formData.variantRequestModels,
-            actuarialType: formData.actuarialType,
-            payoutUpdateRequestModels: formData.rtpSelection,
-          };
-
-          await putApi(url + `/${actuarial.actuarialId}`)(actuarialUpdateRequestModel);
-
-          const changelogData = {
-            actuarialId: actuarial.actuarialId,
-            name: actProps.name,
-            email: actProps.email,
-            modifiedDate: new Date().toISOString(),
-          };
-
-          createChangelog(changelogData);
-        } else {
-          const actuarialRequestModel = {
-            actId: actProps.actId,
-            actName: actProps.actName,
-            projectId: actProps.projectId,
-            projectName: actProps.projectName,
-            isProjectInDevelopment: actProps.isProjectInDevelopment,
-            actuarialLabel: formData.actuarialLabel,
-            actuarialDescription: formData.actuarialDescription,
-            startDateTimeUtc: formData.startDateTimeUtc,
-            endDateTimeUtc: formData.endDateTimeUtc,
-            variantRequestModels: formData.variantRequestModels,
-            actuarialType: formData.actuarialType,
-            payoutRequestModels: formData.rtpSelection,
-          };
-
-          const response = await postApi(url)(actuarialRequestModel);
-
-          const changelogData = {
-            actuarialId: response.data.actuarialId,
-            name: actProps.name,
-            email: actProps.email,
-            modifiedDate: new Date().toISOString(),
-          };
-
-          createChangelog(changelogData);
-        }
-
-        setStatusMessage('Complete');
-        setTimeout(() => {
-          history.push(`/acts/${actProps.actIdRoute}/projects/${actProps.projectId}/dev/actuarials`);
-        }, 2000); // Delay to show completion message
-      } catch (error) {
-        setStatusMessage('An error occurred');
-        if (error.response && error.response.data) {
-          setErrorMessage(error.response.data);
-        } else {
-          setErrorMessage('An error occurred while submitting the form. Please try again.');
-        }
-      } finally {
-        setLoading(false);
+      let changelogData = {
+        actuarialId: null, // This will be set upon successful creation
+        name: actProps.name, // To come from GTP
+        email: actProps.email, // To come from GTP
+        modifiedDate: new Date().toISOString()
       }
-    }, 1000); // Simulate processing delay
-  };
 
-  const acknowledgeCreation = () => (
-    <Grid item xs={12} sm={12}>
-      <FormControlLabel
-        label={
-          <Typography variant="h12" data-testid="review-checkbox">
-            I confirm that I have reviewed the information supplied and understand that my Actuarial Data will be available within <strong>5 minutes</strong> of submission.
-          </Typography>
+      if (isUpdate && actuarial) {
+        const actuarialUpdateRequestModel = {
+          actName: actProps.actName,
+          actuarialLabel: formData.actuarialLabel,
+          actuarialDescription: formData.actuarialDescription,
+          startDateTimeUtc: formData.startDateTimeUtc,
+          endDateTimeUtc: formData.endDateTimeUtc,
+          variantUpdateRequestModels: formData.variantRequestModels,
+          actuarialType: formData.actuarialType,
+          payoutUpdateRequestModels: formData.rtpSelection
         }
-        control={
-          <Checkbox
-            id="project-review-acknowledge-checkbox"
-            onChange={e => setAcknowledged(e.target.checked)}
-            color="primary"
-          />
+
+        // Send UPDATE request to the API endpoint with the request model as the JSON payload
+        const putRequest = putApi(url + `/${actuarial.actuarialId}`)
+        await putRequest(actuarialUpdateRequestModel)
+
+        // Handle the response or show success message
+        changelogData.ActuarialId = actuarial.actuarialId
+        createChangelog(changelogData) // Create changelog entry after update
+      } else {
+        // Set the ActuarialRequestModel for the backend
+        const actuarialRequestModel = {
+          actId: actProps.actId,
+          actName: actProps.actName,
+          projectId: actProps.projectId,
+          projectName: actProps.projectName,
+          isProjectInDevelopment: actProps.isProjectInDevelopment,
+          actuarialLabel: formData.actuarialLabel,
+          actuarialDescription: formData.actuarialDescription,
+          startDateTimeUtc: formData.startDateTimeUtc,
+          endDateTimeUtc: formData.endDateTimeUtc,
+          variantRequestModels: formData.variantRequestModels,
+          actuarialType: formData.actuarialType,
+          payoutRequestModels: formData.rtpSelection
         }
-      />
-    </Grid>
-  );
+
+        const response = await postApi(url)(actuarialRequestModel) // Send POST request to the API endpoint with the request model as the JSON payload)
+
+        changelogData.actuarialId = response.data.actuarialId // Correctly setting ActuarialId
+        createChangelog(changelogData) // Log the creation action
+      }
+
+      //Refresh the main window with redirect routing
+      history.push(
+        `/acts/${actProps.actIdRoute}/projects/${actProps.projectId}/dev/actuarials`
+      )
+    } catch (error) {
+      // Handle the error or show an error message
+      console.error(error)
+
+      // Check if the error response contains an error message
+      if (error.response && error.response.data) {
+        // Set the error message from the API response
+        setErrorMessage(error.response.data)
+      } else {
+        // Set a generic error message
+        setErrorMessage('An error occurred while submitting the form. Please try again.')
+      }
+    }
+  }
+
+  const acknowledgeCreation = () => {
+    return (
+      <Grid item xs={12} sm={12}>
+        <FormControlLabel
+          label={
+            <Typography variant="h6" data-testid="review-checkbox">
+              I confirm that I have reviewed the information supplied and understand that my
+              Actuarial Data will be available within
+              <strong> 5 minutes</strong> of submission.
+            </Typography>
+          }
+          control={
+            <Checkbox
+              id="project-review-acknowledge-checkbox"
+              onChange={e => setAcknowledged(e.target.checked)}
+              color="primary"
+            />
+          }
+        />
+      </Grid>
+    )
+  }
 
   return (
     <form className={classes.form} onSubmit={handleSubmit}>
       <Paper className={classes.paper}>
-        <Grid container spacing={2} direction="row" justifyContent="flex-start" alignItems="stretch">
-          {displayData('Review', 'Please confirm that the information displayed below is correct.', 12, 'h5')}
-          {displayData('Act name', formData.actName, 6, 'h6')}
-          {displayData('Actuarial Type', formData.actuarialType, 6, 'h6')}
-          {displayData('Actuarial label', formData.actuarialLabel, 6, 'h6')}
-          {displayData('Actuarial description', formData.actuarialDescription, 6, 'h6')}
+        <Grid
+          container
+          spacing={2}
+          direction="row"
+          justifyContent="flex-start"
+          alignItems="stretch">
+          {displayData(
+            'Review',
+            'Please confirm that the information displayed below is correct.',
+            12,
+            'h3'
+          )}
+          {displayData('Act name', formData.actName, 6)}
+          {displayData('Actuarial Type', formData.actuarialType, 6)}
+          {displayData('Actuarial label', formData.actuarialLabel)}
+          {displayData('Actuarial description', formData.actuarialDescription)}
         </Grid>
       </Paper>
 
       <ActuarialDistributionReview rtpDistribution={formData.rtpSelection} />
+      {/* Render the variants table if there are variants */}
       {formData.variantRequestModels.length > 0 && (
         <div className={classes.tableContainer}>
           <FormHeader variant="h3" title="Actuarial treatments:" />
@@ -324,12 +330,13 @@ const Review = ({ prevStep, formData, isUpdate, actuarial, actProps }) => {
               classes={{
                 table: classes.table,
                 tableHeaderCell: classes.tableHeaderCell,
-                tableCell: classes.tableCell,
+                tableCell: classes.tableCell
               }}
             />
           </Container>
         </div>
       )}
+      {/* Render the error message if there is an error */}
       {errorMessage && (
         <div className={classes.errorContainer}>
           <Typography variant="body2" color="error">
@@ -339,6 +346,7 @@ const Review = ({ prevStep, formData, isUpdate, actuarial, actProps }) => {
       )}
       <Spacer height={2} />
       {acknowledgeCreation()}
+      {/* Button group */}
       <div className={classes.buttonGroup}>
         <StepperButtons
           backButtonState={false}
@@ -357,21 +365,12 @@ const Review = ({ prevStep, formData, isUpdate, actuarial, actProps }) => {
           type="submit"
           variant="contained"
           className={`${classes.button} ${classes.nextButton}`}
-          disabled={!acknowledged}
-        >
-          {loading ? (
-            <div className={classes.spinnerContainer}>
-              <CircularProgress />
-              <Typography variant="body1">{statusMessage}</Typography>
-            </div>
-          ) : (
-            'Confirm and submit'
-          )}
+          disabled={!acknowledged}>
+          Confirm and submit
         </Button>
       </div>
     </form>
-  );
-};
-
+  )
+}
 
 export default Review

@@ -15,13 +15,13 @@ public class AzureStorageQueueService : IAzureStorageQueue
     {
         var queueClient = await CreateQueueClient();
 
-        if (null != await queueClient.CreateIfNotExistsAsync())
-        {
-            _logger.LogInformation($"Created Azure Message Queue {_azureStorageOptions.QueueName}");
-        }
-
         try
         {
+            if (null != await queueClient.CreateIfNotExistsAsync())
+            {
+                _logger.LogInformation($"Created Azure Message Queue {_azureStorageOptions.QueueName}");
+            }
+
             await queueClient.SendMessageAsync(JsonHelper.Serialize(schemaModel));
             return true;
         }

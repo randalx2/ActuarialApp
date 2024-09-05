@@ -2,6 +2,6 @@
 
 public class FormControl : ControlBase
 {
-    public override string Type => "Form";
+    public new string Type => "Form";
     public List<ControlBase> Controls { get; set; } = [];
 }

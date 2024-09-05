@@ -10,12 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.AppHost" Version="8.1.0" />
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="8.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Gateways\Core.Gateway\Core.Gateway.csproj" />
-    <ProjectReference Include="..\..\Microservices\Core\Core.Api\Core.Api.csproj" />
     <ProjectReference Include="..\..\Microservices\Pipeline\Pipeline.Api\Pipeline.Api.csproj" />
     <ProjectReference Include="..\..\Microservices\Schema\Schema.Api\Schema.Api.csproj" />
   </ItemGroup>

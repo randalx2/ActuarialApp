@@ -4,8 +4,6 @@ try
     var builder = WebApplication.CreateBuilder(args);
     builder.AddServiceDefaults();
 
-    builder.Services.RegisterCoreOcelotConsulServices(builder.Configuration);
-
     builder.Services.AddSchemaApplicationServices(builder.Configuration);
     builder.Services.AddPipelineApplicationServices(builder.Configuration);
     builder.Services.AddCoreInfrastructureOpenApiServices(builder.Configuration);

@@ -2,6 +2,6 @@
 
 public class ButtonControl : ControlBase
 {
-    public override string Type => "Button";
+    public new string Type => "Button";
     public bool IsSubmit { get; set; }
 }

@@ -7,6 +7,7 @@ public static class ServiceCollectionExtensions
         services.AddTransient<IPublisher, PublisherService>();
         services.AddTransient<ISubscriber, SubscriberService>();
         services.AddTransient<IEventGridService, EventGridService>();
+        services.AddTransient<IEventService, EventService>();
 
         return services;
     }

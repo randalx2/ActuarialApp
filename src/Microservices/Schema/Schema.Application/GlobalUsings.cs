@@ -12,6 +12,7 @@ global using Core.Domain.Entities;
 global using Core.Domain.Models;
 global using Schema.Application.Abstractions;
 global using Schema.Persistence;
+global using Schema.Application.Services;
 
 /* Microsoft */
 global using Microsoft.AspNetCore.Mvc;

@@ -7,6 +7,8 @@ public static class ServiceCollectionExtensions
         services.AddSchemaPersistenceServices(configuration);
         services.AddCoreApplicationServices();
 
+        services.AddTransient<ISchemaService, SchemaService>();
+
         return services;
     }
 }

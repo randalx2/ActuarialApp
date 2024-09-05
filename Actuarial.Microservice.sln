@@ -23,16 +23,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aspire", "Aspire", "{B547F8F4-C36B-4426-8762-5745E2B114D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Actuarial.AppHost", "src\Aspire\Actuarial.AppHost\Actuarial.AppHost.csproj", "{FB35C45F-A6BE-40B9-9DB3-164F72785A56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Actuarial.AppHost", "src\Aspire\Actuarial.AppHost\Actuarial.AppHost.csproj", "{FB35C45F-A6BE-40B9-9DB3-164F72785A56}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{0A1AE750-E9FB-4258-966F-2425092B7B67}"
-	ProjectSection(SolutionItems) = preProject
-		docs\ActuarialModelWebAppDesign.docx = docs\ActuarialModelWebAppDesign.docx
-		docs\ActuarialModelWebAppDesign.pdf = docs\ActuarialModelWebAppDesign.pdf
-		docs\Design Challenge Actuarial Model Web Application.docx = docs\Design Challenge Actuarial Model Web Application.docx
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Actuarial.ServiceDefaults", "src\Aspire\Actuarial.ServiceDefaults\Actuarial.ServiceDefaults.csproj", "{018E9A85-67E9-46C5-8F70-084C080878D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Actuarial.ServiceDefaults", "src\Aspire\Actuarial.ServiceDefaults\Actuarial.ServiceDefaults.csproj", "{018E9A85-67E9-46C5-8F70-084C080878D9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateways", "Gateways", "{08A20956-1284-46FE-A59A-83F79E3408AA}"
 EndProject
@@ -40,19 +33,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Schema", "Schema", "{ADA20A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pipeline", "Pipeline", "{648F4436-E60A-4F03-96C9-97BA9F8A1139}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schema.Api", "src\Microservices\Schema\Schema.Api\Schema.Api.csproj", "{34BB9B3B-C05E-43FE-944B-70D12AA57917}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Schema.Api", "src\Microservices\Schema\Schema.Api\Schema.Api.csproj", "{34BB9B3B-C05E-43FE-944B-70D12AA57917}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pipeline.Api", "src\Microservices\Pipeline\Pipeline.Api\Pipeline.Api.csproj", "{89BE5AB6-D42F-4ED8-AD22-58657F00C4E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pipeline.Api", "src\Microservices\Pipeline\Pipeline.Api\Pipeline.Api.csproj", "{89BE5AB6-D42F-4ED8-AD22-58657F00C4E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Gateway", "src\Gateways\Core.Gateway\Core.Gateway.csproj", "{3EDE1681-90B0-4089-8679-2641807B05B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Gateway", "src\Gateways\Core.Gateway\Core.Gateway.csproj", "{3EDE1681-90B0-4089-8679-2641807B05B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Domain", "src\Core\Core.Domain\Core.Domain.csproj", "{7BDF6CB7-BB5F-427D-A16D-ADED989E35CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Domain", "src\Core\Core.Domain\Core.Domain.csproj", "{7BDF6CB7-BB5F-427D-A16D-ADED989E35CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Application", "src\Core\Core.Application\Core.Application.csproj", "{6C7C8E39-1671-4FB1-AB20-5D7389BB61D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Application", "src\Core\Core.Application\Core.Application.csproj", "{6C7C8E39-1671-4FB1-AB20-5D7389BB61D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Infrastructure", "src\Core\Core.Infrastructure\Core.Infrastructure.csproj", "{A5B827E2-233F-4176-AA35-A878BD28E00A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Infrastructure", "src\Core\Core.Infrastructure\Core.Infrastructure.csproj", "{A5B827E2-233F-4176-AA35-A878BD28E00A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Persistence", "src\Core\Core.Persistence\Core.Persistence.csproj", "{0FDC4308-AF44-4A2D-8247-1A7D1DDEA94B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Persistence", "src\Core\Core.Persistence\Core.Persistence.csproj", "{0FDC4308-AF44-4A2D-8247-1A7D1DDEA94B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{C08E844D-64DC-4498-A145-D7A0D8CCB816}"
 EndProject
@@ -64,25 +57,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence", "{B0F327F8-1D7B-4C4C-A8A8-2CCE2F9343C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Infrastructure.SqlServer", "src\Core\Core.Infrastructure.SqlServer\Core.Infrastructure.SqlServer.csproj", "{952C082B-083A-4B6B-9B25-72BEB1441226}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Infrastructure.SqlServer", "src\Core\Core.Infrastructure.SqlServer\Core.Infrastructure.SqlServer.csproj", "{952C082B-083A-4B6B-9B25-72BEB1441226}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Application.Abstractions", "src\Core\Core.Application.Abstractions\Core.Application.Abstractions.csproj", "{1DE07C6B-A793-4C5B-A70B-4EF54902F192}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Application.Abstractions", "src\Core\Core.Application.Abstractions\Core.Application.Abstractions.csproj", "{1DE07C6B-A793-4C5B-A70B-4EF54902F192}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{983BB1A9-9A33-4831-987E-60DEAEE9F395}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Infrastructure.AzureStorage", "src\Core\Core.Infrastructure.AzureStorage\Core.Infrastructure.AzureStorage.csproj", "{065CABB4-A172-4842-ABB6-4DFE1FB290B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Infrastructure.AzureStorage", "src\Core\Core.Infrastructure.AzureStorage\Core.Infrastructure.AzureStorage.csproj", "{065CABB4-A172-4842-ABB6-4DFE1FB290B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Schema.Persistence", "src\Microservices\Schema\Schema.Persistence\Schema.Persistence.csproj", "{FA0315A6-1213-4E6C-9324-7E484D07E432}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schema.Persistence", "src\Microservices\Schema\Schema.Persistence\Schema.Persistence.csproj", "{FA0315A6-1213-4E6C-9324-7E484D07E432}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Schema.Application", "src\Microservices\Schema\Schema.Application\Schema.Application.csproj", "{6384F61D-08C9-483C-975D-94B1CF96EF23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schema.Application", "src\Microservices\Schema\Schema.Application\Schema.Application.csproj", "{6384F61D-08C9-483C-975D-94B1CF96EF23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Application.Dto", "src\Core\Core.Application.Dto\Core.Application.Dto.csproj", "{F6099C2E-4935-4C03-ABB8-D00826B447AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Application.Dto", "src\Core\Core.Application.Dto\Core.Application.Dto.csproj", "{F6099C2E-4935-4C03-ABB8-D00826B447AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pipeline.Application", "src\Microservices\Pipeline\Pipeline.Application\Pipeline.Application.csproj", "{F1EFB001-5596-40F3-8D90-64AC8DCC082D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Api", "src\Microservices\Core\Core.Api\Core.Api.csproj", "{74A8099A-E6F5-4319-AE5A-BE9CA64D164C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pipeline.Application", "src\Microservices\Pipeline\Pipeline.Application\Pipeline.Application.csproj", "{F1EFB001-5596-40F3-8D90-64AC8DCC082D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Infrastructure.EventGrid", "src\Core\Core.Infrastructure.EventGrid\Core.Infrastructure.EventGrid.csproj", "{104E2BDA-8088-4E54-83A0-5A7583FC2D4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Infrastructure.EventGrid", "src\Core\Core.Infrastructure.EventGrid\Core.Infrastructure.EventGrid.csproj", "{104E2BDA-8088-4E54-83A0-5A7583FC2D4B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -150,10 +139,6 @@ Global
 		{F6099C2E-4935-4C03-ABB8-D00826B447AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6099C2E-4935-4C03-ABB8-D00826B447AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6099C2E-4935-4C03-ABB8-D00826B447AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{74A8099A-E6F5-4319-AE5A-BE9CA64D164C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{74A8099A-E6F5-4319-AE5A-BE9CA64D164C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{74A8099A-E6F5-4319-AE5A-BE9CA64D164C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{74A8099A-E6F5-4319-AE5A-BE9CA64D164C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F1EFB001-5596-40F3-8D90-64AC8DCC082D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F1EFB001-5596-40F3-8D90-64AC8DCC082D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1EFB001-5596-40F3-8D90-64AC8DCC082D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -194,12 +179,10 @@ Global
 		{B0F327F8-1D7B-4C4C-A8A8-2CCE2F9343C7} = {ADA20A63-2033-493C-B1AC-99D0A77C591C}
 		{952C082B-083A-4B6B-9B25-72BEB1441226} = {8CA2D236-56FC-4A89-B398-3E664C6E25DF}
 		{1DE07C6B-A793-4C5B-A70B-4EF54902F192} = {4AC36F17-8D71-423D-9573-5F5C6EDEEFE0}
-		{983BB1A9-9A33-4831-987E-60DEAEE9F395} = {BA8A74EE-D715-479F-849D-EAB44F5C970C}
 		{065CABB4-A172-4842-ABB6-4DFE1FB290B8} = {8CA2D236-56FC-4A89-B398-3E664C6E25DF}
 		{FA0315A6-1213-4E6C-9324-7E484D07E432} = {B0F327F8-1D7B-4C4C-A8A8-2CCE2F9343C7}
 		{6384F61D-08C9-483C-975D-94B1CF96EF23} = {05EC4871-B440-44A4-A0FE-D09740A06CCA}
 		{F6099C2E-4935-4C03-ABB8-D00826B447AB} = {4AC36F17-8D71-423D-9573-5F5C6EDEEFE0}
-		{74A8099A-E6F5-4319-AE5A-BE9CA64D164C} = {983BB1A9-9A33-4831-987E-60DEAEE9F395}
 		{F1EFB001-5596-40F3-8D90-64AC8DCC082D} = {FBD3BBB0-8FAA-4E4C-8B9E-FAB75562CA3C}
 		{104E2BDA-8088-4E54-83A0-5A7583FC2D4B} = {8CA2D236-56FC-4A89-B398-3E664C6E25DF}
 	EndGlobalSection
