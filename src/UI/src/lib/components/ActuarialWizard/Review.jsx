@@ -1,15 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Button, Typography, Grid, FormControlLabel, Checkbox } from '@material-ui/core'
+import { Button, Typography, Grid, FormControlLabel, Checkbox, CircularProgress } from '@material-ui/core'
 import { Paper } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import FormHeader from '../gtp/FormHeader'
 import StepperButtons from '../gtp/StepperButtons'
-import useABTestingApi from '../../hooks/api/useABTestingApi' // Import the useABTestingApi hook
+// import useABTestingApi from '../../hooks/api/useABTestingApi' // Import the useABTestingApi hook
 import TreatmentsTable from './TreatmentsTable'
-import useCreateChangelog from '../../hooks/api/useCreateChangelog'
+// import useCreateChangelog from '../../hooks/api/useCreateChangelog'
 import Spacer from '../Spacer'
 import ActuarialDistributionReview from './ActuarialDistributionReview'
+
+//For mock purposes
+import actuarialsData from '../../mocks/actuarials.json'
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -37,7 +40,8 @@ const useStyles = makeStyles(theme => ({
   buttonGroup: {
     display: 'flex',
     justifyContent: 'flex-end',
-    alignItems: 'flex-start',
+    //alignItems: 'flex-start',
+    alignItems: 'center', // Ensure items are aligned vertically
     width: '100%',
     marginTop: theme.spacing(2.5)
   },
@@ -166,6 +170,14 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1.5),
     width: '100%',
     position: 'sticky'
+  },
+  spinnerContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    marginRight: theme.spacing(2), // Add margin to give space between spinner and buttons
+  },
+  spinnerText: {
+    marginLeft: theme.spacing(2),
   }
 }))
 
@@ -177,11 +189,168 @@ const Review = ({ prevStep, formData, isUpdate, actuarial, actProps }) => {
   const classes = useStyles()
   const [errorMessage, setErrorMessage] = useState('')
   const [acknowledged, setAcknowledged] = useState(false)
+  const [actuarialData, setActuarialData] = useState(null); // State to hold mock actuarial data
+  const [processingState, setProcessingState] = useState(''); // State for pipeline processing
+  const [isProcessing, setIsProcessing] = useState(false); // State to control the spinner
 
   // Destructuring mutate function from useCreateChangelog for creating a new changelog
-  const { mutate: createChangelog } = useCreateChangelog()
+  // const { mutate: createChangelog } = useCreateChangelog()
 
-  const { putApi, postApi } = useABTestingApi() // Create an instance of the useABTestingApi hook
+  // const { putApi, postApi } = useABTestingApi() // Create an instance of the useABTestingApi hook
+
+    // Use mock data instead of API calls
+    useEffect(() => {
+      const actuarialItem = actuarialsData.find((item) => item.actuarialId === actProps.actuarialId);
+      if (actuarialItem) {
+        setActuarialData(actuarialItem);
+      }
+    }, [actProps.actuarialId]);
+
+    // Simulating adding data to the mock actuarialsData array
+    const addActuarialData = (newData) => {
+      actuarialsData.push(newData);
+      setActuarialData(newData); // Update the state to reflect the new addition
+    };
+  
+    // Simulating updating existing actuarial data
+    const updateActuarialData = (updatedData) => {
+      const index = actuarialsData.findIndex((item) => item.actuarialId === updatedData.actuarialId);
+      if (index !== -1) {
+        actuarialsData[index] = updatedData;
+        setActuarialData(updatedData); // Update the state to reflect the changes
+      }
+    };
+
+  const handleReturn = () => {
+    history.push(`/acts/${actProps.actIdRoute}/projects/${actProps.projectId}/dev/actuarials`)
+  }
+
+  // const handleSubmit = async e => {
+  //   e.preventDefault()
+  //   setErrorMessage('')
+
+  //   try {
+  //     const url = '/actuarials'
+
+  //     let changelogData = {
+  //       actuarialId: null, // This will be set upon successful creation
+  //       name: actProps.name, // To come from GTP
+  //       email: actProps.email, // To come from GTP
+  //       modifiedDate: new Date().toISOString()
+  //     }
+
+  //     if (isUpdate && actuarial) {
+  //       const actuarialUpdateRequestModel = {
+  //         actName: actProps.actName,
+  //         actuarialLabel: formData.actuarialLabel,
+  //         actuarialDescription: formData.actuarialDescription,
+  //         startDateTimeUtc: formData.startDateTimeUtc,
+  //         endDateTimeUtc: formData.endDateTimeUtc,
+  //         variantUpdateRequestModels: formData.variantRequestModels,
+  //         actuarialType: formData.actuarialType,
+  //         payoutUpdateRequestModels: formData.rtpSelection
+  //       }
+
+  //       // Send UPDATE request to the API endpoint with the request model as the JSON payload
+  //       const putRequest = putApi(url + `/${actuarial.actuarialId}`)
+  //       await putRequest(actuarialUpdateRequestModel)
+
+  //       // Handle the response or show success message
+  //       changelogData.ActuarialId = actuarial.actuarialId
+  //       createChangelog(changelogData) // Create changelog entry after update
+  //     } else {
+  //       // Set the ActuarialRequestModel for the backend
+  //       const actuarialRequestModel = {
+  //         actId: actProps.actId,
+  //         actName: actProps.actName,
+  //         projectId: actProps.projectId,
+  //         projectName: actProps.projectName,
+  //         isProjectInDevelopment: actProps.isProjectInDevelopment,
+  //         actuarialLabel: formData.actuarialLabel,
+  //         actuarialDescription: formData.actuarialDescription,
+  //         startDateTimeUtc: formData.startDateTimeUtc,
+  //         endDateTimeUtc: formData.endDateTimeUtc,
+  //         variantRequestModels: formData.variantRequestModels,
+  //         actuarialType: formData.actuarialType,
+  //         payoutRequestModels: formData.rtpSelection
+  //       }
+
+  //       const response = await postApi(url)(actuarialRequestModel) // Send POST request to the API endpoint with the request model as the JSON payload)
+
+  //       changelogData.actuarialId = response.data.actuarialId // Correctly setting ActuarialId
+  //       createChangelog(changelogData) // Log the creation action
+  //     }
+
+  //     //Refresh the main window with redirect routing
+  //     history.push(
+  //       `/acts/${actProps.actIdRoute}/projects/${actProps.projectId}/dev/actuarials`
+  //     )
+  //   } catch (error) {
+  //     // Handle the error or show an error message
+  //     console.error(error)
+
+  //     // Check if the error response contains an error message
+  //     if (error.response && error.response.data) {
+  //       // Set the error message from the API response
+  //       setErrorMessage(error.response.data)
+  //     } else {
+  //       // Set a generic error message
+  //       setErrorMessage('An error occurred while submitting the form. Please try again.')
+  //     }
+  //   }
+  // }
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    setErrorMessage('');
+    setIsProcessing(true); // Start spinner
+    setProcessingState('Pipeline Started');
+
+    try {
+      const isUpdateMode = Boolean(isUpdate && actuarialData);
+
+      const actuarialRequestModel = {
+        actuarialId: actuarialData ? actuarialData.actuarialId : Date.now(), // Generate ID for new data
+        label: formData.actuarialLabel || 'New Actuarial Label',
+        description: formData.actuarialDescription || 'New Actuarial Description',
+        projectId: actProps.projectId,
+        startDateTimeUtc: formData.startDateTimeUtc || new Date().toISOString(),
+        endDateTimeUtc: formData.endDateTimeUtc || new Date().toISOString(),
+        actuarialType: formData.actuarialType || 'Default',
+        variants: formData.variantRequestModels || [],
+        payouts: formData.rtpSelection || [],
+      };
+
+      // Simulate the delays and processing
+      setTimeout(() => {
+        setProcessingState('Processing...');
+
+        setTimeout(() => {
+          // Update or add logic
+          if (isUpdateMode) {
+            updateActuarialData(actuarialRequestModel);
+            console.log('Updated Data:', actuarialRequestModel);
+          } else {
+            addActuarialData(actuarialRequestModel);
+            console.log('Added New Data:', actuarialRequestModel);
+          }
+
+          setProcessingState('Complete');
+
+          // Redirect the user after "Complete"
+          setTimeout(() => {
+            setIsProcessing(false); // Stop spinner
+            history.push(`/acts/${actProps.actIdRoute}/projects/${actProps.projectId}/dev/actuarials`);
+          }, 1000); // 1 second delay after "Complete"
+        }, 3000); // Simulate "Processing..." for 3 seconds
+      }, 2000); // Simulate "Pipeline Started" for 2 seconds
+    } catch (error) {
+      console.error(error);
+      setErrorMessage('An error occurred while submitting the form. Please try again.');
+      setIsProcessing(false); // Stop spinner in case of an error
+    }
+  };
+
 
   function displayData(title, value, size, variant) {
     if (!value || value.length === 0) return
@@ -195,90 +364,12 @@ const Review = ({ prevStep, formData, isUpdate, actuarial, actProps }) => {
     )
   }
 
-  const handleReturn = () => {
-    history.push(`/acts/${actProps.actIdRoute}/projects/${actProps.projectId}/dev/actuarials`)
-  }
-  const handleSubmit = async e => {
-    e.preventDefault()
-    setErrorMessage('')
-
-    try {
-      const url = '/actuarials'
-
-      let changelogData = {
-        actuarialId: null, // This will be set upon successful creation
-        name: actProps.name, // To come from GTP
-        email: actProps.email, // To come from GTP
-        modifiedDate: new Date().toISOString()
-      }
-
-      if (isUpdate && actuarial) {
-        const actuarialUpdateRequestModel = {
-          actName: actProps.actName,
-          actuarialLabel: formData.actuarialLabel,
-          actuarialDescription: formData.actuarialDescription,
-          startDateTimeUtc: formData.startDateTimeUtc,
-          endDateTimeUtc: formData.endDateTimeUtc,
-          variantUpdateRequestModels: formData.variantRequestModels,
-          actuarialType: formData.actuarialType,
-          payoutUpdateRequestModels: formData.rtpSelection
-        }
-
-        // Send UPDATE request to the API endpoint with the request model as the JSON payload
-        const putRequest = putApi(url + `/${actuarial.actuarialId}`)
-        await putRequest(actuarialUpdateRequestModel)
-
-        // Handle the response or show success message
-        changelogData.ActuarialId = actuarial.actuarialId
-        createChangelog(changelogData) // Create changelog entry after update
-      } else {
-        // Set the ActuarialRequestModel for the backend
-        const actuarialRequestModel = {
-          actId: actProps.actId,
-          actName: actProps.actName,
-          projectId: actProps.projectId,
-          projectName: actProps.projectName,
-          isProjectInDevelopment: actProps.isProjectInDevelopment,
-          actuarialLabel: formData.actuarialLabel,
-          actuarialDescription: formData.actuarialDescription,
-          startDateTimeUtc: formData.startDateTimeUtc,
-          endDateTimeUtc: formData.endDateTimeUtc,
-          variantRequestModels: formData.variantRequestModels,
-          actuarialType: formData.actuarialType,
-          payoutRequestModels: formData.rtpSelection
-        }
-
-        const response = await postApi(url)(actuarialRequestModel) // Send POST request to the API endpoint with the request model as the JSON payload)
-
-        changelogData.actuarialId = response.data.actuarialId // Correctly setting ActuarialId
-        createChangelog(changelogData) // Log the creation action
-      }
-
-      //Refresh the main window with redirect routing
-      history.push(
-        `/acts/${actProps.actIdRoute}/projects/${actProps.projectId}/dev/actuarials`
-      )
-    } catch (error) {
-      // Handle the error or show an error message
-      console.error(error)
-
-      // Check if the error response contains an error message
-      if (error.response && error.response.data) {
-        // Set the error message from the API response
-        setErrorMessage(error.response.data)
-      } else {
-        // Set a generic error message
-        setErrorMessage('An error occurred while submitting the form. Please try again.')
-      }
-    }
-  }
-
   const acknowledgeCreation = () => {
     return (
       <Grid item xs={12} sm={12}>
         <FormControlLabel
           label={
-            <Typography variant="h6" data-testid="review-checkbox">
+            <Typography variant="h8" data-testid="review-checkbox">
               I confirm that I have reviewed the information supplied and understand that my
               Actuarial Data will be available within
               <strong> 5 minutes</strong> of submission.
@@ -309,9 +400,9 @@ const Review = ({ prevStep, formData, isUpdate, actuarial, actProps }) => {
             'Review',
             'Please confirm that the information displayed below is correct.',
             12,
-            'h3'
+            'h5'
           )}
-          {displayData('Act name', formData.actName, 6)}
+          {displayData('Actuarial name', formData.actName, 6)}
           {displayData('Actuarial Type', formData.actuarialType, 6)}
           {displayData('Actuarial label', formData.actuarialLabel)}
           {displayData('Actuarial description', formData.actuarialDescription)}
@@ -330,7 +421,7 @@ const Review = ({ prevStep, formData, isUpdate, actuarial, actProps }) => {
               classes={{
                 table: classes.table,
                 tableHeaderCell: classes.tableHeaderCell,
-                tableCell: classes.tableCell
+                tableCell: classes.tableCell,
               }}
             />
           </Container>
@@ -365,12 +456,22 @@ const Review = ({ prevStep, formData, isUpdate, actuarial, actProps }) => {
           type="submit"
           variant="contained"
           className={`${classes.button} ${classes.nextButton}`}
-          disabled={!acknowledged}>
+          disabled={!acknowledged || isProcessing}>
           Confirm and submit
         </Button>
       </div>
+
+      {/* Spinner with pipeline processing state */}
+      {isProcessing && (
+        <div className={classes.spinnerContainer}>
+          <CircularProgress />
+          <Typography variant="body1" className={classes.spinnerText}>
+            {processingState}
+          </Typography>
+        </div>
+      )}
     </form>
-  )
+  );
 }
 
 export default Review
