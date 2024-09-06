@@ -2,6 +2,6 @@
 
 public class ComboBoxControl : ControlBase
 {
-    public override string Type => "ComboBox";
+    public new string Type => "ComboBox";
     public List<string> Options { get; set; } = [];
 }

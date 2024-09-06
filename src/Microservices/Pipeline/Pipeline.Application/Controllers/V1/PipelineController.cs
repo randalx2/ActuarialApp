@@ -17,8 +17,8 @@ public class PipelineController : BaseApiController
         _azureStorageOptions = azureStorageOptions;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> PostMessage([FromBody] SchemaModel schemaModel)
+    [HttpPost()]
+    public async Task<IActionResult> PostMessageAsync([FromBody] SchemaModel schemaModel)
     {
         var response = await _azureStorageQueue.InsertMessage(schemaModel);
         return Ok();

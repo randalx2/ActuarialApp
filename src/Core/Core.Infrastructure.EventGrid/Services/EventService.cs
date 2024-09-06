@@ -28,6 +28,12 @@ public class EventService : IEventService
             return await Task.FromResult(EventGridMessageType.Notification);
         }
 
+        // ONLY added for DEMO purposes
+        if (!eventTypeSubcriptionValidation && !eventTypeNotification)
+        {
+            return await Task.FromResult(EventGridMessageType.Notification);
+        }
+
         return await Task.FromResult(EventGridMessageType.None);
     }
 
@@ -36,8 +42,7 @@ public class EventService : IEventService
         var response = await _azureStorageQueue.RetrieveNextMessageAsync(cancellationToken);
 
         if (response)
-        {
-            // TODO: Add logging information
+        {            
             _logger.LogInformation("{datetime} {method}: Processing of {json} succeeded. Returning Ok().", DateTime.Now, nameof(HandleNotificationAsync), jsonContent);
             return new OkObjectResult(response);
         }

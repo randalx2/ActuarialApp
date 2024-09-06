@@ -15,13 +15,13 @@ public class AzureStorageQueueService : IAzureStorageQueue
     {
         var queueClient = await CreateQueueClient();
 
-        if (null != await queueClient.CreateIfNotExistsAsync())
-        {
-            _logger.LogInformation($"Created Azure Message Queue {_azureStorageOptions.QueueName}");
-        }
-
         try
         {
+            if (null != await queueClient.CreateIfNotExistsAsync())
+            {
+                _logger.LogInformation($"Created Azure Message Queue {_azureStorageOptions.QueueName}");
+            }
+
             await queueClient.SendMessageAsync(JsonHelper.Serialize(schemaModel));
             return true;
         }
@@ -35,6 +35,7 @@ public class AzureStorageQueueService : IAzureStorageQueue
     public async Task<bool> ProcessQueueMessage(string message, CancellationToken cancellationToken = default)
     {
         // Process the data receieved from Azure Storage
+        // This is where we hit the Python Microservice and wait for a successful message
 
         return await Task.FromResult(true);
     }

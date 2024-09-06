@@ -2,9 +2,6 @@ Log.Information("Core Api Booting Up...");
 try
 {
     var builder = WebApplication.CreateBuilder(args);
-    builder.AddServiceDefaults();
-
-    builder.Services.RegisterCoreOcelotConsulServices(builder.Configuration);
 
     builder.Services.AddSchemaApplicationServices(builder.Configuration);
     builder.Services.AddPipelineApplicationServices(builder.Configuration);
@@ -17,8 +14,6 @@ try
 
     var app = builder.Build();
     app.UseCoreInfrastructureOpenApiServices();
-
-    app.MapDefaultEndpoints();
 
     // Configure the HTTP request pipeline.
 
